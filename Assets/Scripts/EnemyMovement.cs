@@ -116,7 +116,7 @@ public class EnemyMovement : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if (physicsEnabled && (rigidBody.IsSleeping() || Time.time - physics_start_time > 2.0f))
+        if (physicsEnabled && (rigidBody.IsSleeping() || Time.time - physics_start_time > 1.0f))
         {
             StopPhysics();
         }

@@ -9,10 +9,6 @@ public class GunBehavior : MonoBehaviour {
     public GameManager gameManager;
     public PlayerShooting playerShooting;
     public bool continuousShooting = false;
-    [Range(0, 1)]
-    public float hapticStrength = 0.10f;
-    public float hapticDuration = 0.10f;
-    public float hapticInterval = 0.05f;
     public Transform viveSnapHandle;
 
     private VRTK_InteractableObject interactableObject;
@@ -71,9 +67,7 @@ public class GunBehavior : MonoBehaviour {
 
     private void Shoot()
     {
-        VRTK_ControllerHaptics.TriggerHapticPulse(VRTK_ControllerReference.GetControllerReference(interactingObject), hapticStrength, hapticDuration, hapticInterval);
-        //VRTK_ControllerHaptics.TriggerHapticPulse(VRTK_ControllerReference.GetControllerReference(interactingObject), playerShooting.GetComponent<AudioSource>().clip);
-        playerShooting.Shoot();
+        playerShooting.Shoot(interactingObject);
     }
 
     public void ForceRelease()

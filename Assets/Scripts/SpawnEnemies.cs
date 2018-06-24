@@ -31,7 +31,12 @@ public class SpawnEnemies : MonoBehaviour {
             if (timer >= spawnInterval)
             {
                 timer = 0.0f;
-                spawnInterval = Random.Range(spawnMinInterval, Mathf.Max(spawnMinInterval,spawnMaxInterval-PlayerScore.Score/2000));
+                var minInterval = spawnMinInterval;
+                var maxInterval = spawnMaxInterval;
+                minInterval = Mathf.Max(0.2f, minInterval - PlayerScore.Score / 2000);
+                maxInterval = Mathf.Max(0.2f, maxInterval - PlayerScore.Score / 2000);
+
+                spawnInterval = Random.Range(minInterval, maxInterval);
                 var obj = Instantiate(ennemy, spawnPoint.position, spawnPoint.rotation);
 
                 float speed = Random.Range(1.25f, 3.0f);

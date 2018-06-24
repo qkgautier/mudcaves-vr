@@ -1,10 +1,16 @@
 ﻿using UnityEngine;
+using VRTK;
 
 public class PlayerShooting : MonoBehaviour
 {
     public float damagePerShot = 20;
     public float timeBetweenBullets = 0.15f;
     public float range = 100f;
+
+    [Range(0, 1)]
+    public float hapticStrength = 0.10f;
+    public float hapticDuration = 0.10f;
+    public float hapticInterval = 0.05f;
 
 
     float timer;
@@ -49,13 +55,15 @@ public class PlayerShooting : MonoBehaviour
     }
 
 
-    public void Shoot ()
+    public void Shoot (GameObject interactingObject = null)
     {
         if (timer >= timeBetweenBullets && Time.timeScale != 0)
         {
             timer = 0f;
 
             gunAudio.Play();
+
+            VRTK_ControllerHaptics.TriggerHapticPulse(VRTK_ControllerReference.GetControllerReference(interactingObject), hapticStrength, hapticDuration, hapticInterval);
 
             gunLight.intensity = 0.4f;
             //gunLight.enabled = true;
